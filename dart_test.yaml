@@ -1,0 +1,15 @@
+tags:
+  golden:
+    timeout: 15s
+
+format:
+  - json
+
+test_files:
+  - test
+  - test/**
+  - test_benchmark
+  - test_benchmark/**
+  - packages/features/**/test/features/*
+
+color: true

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <theme name="appTheme" mode="light">
+    <!-- ungrouped colors -->
+    <color tags="primary surfaceTint" name="white">#ffffff</color>
+    <color name="untagged">#12ABCC</color>
+    <group name="themeData">
+      <!--
+        Tag names in a group won't clash with ungrouped colors or colors in
+        other groups. In a sense they are namespaced.
+      -->
+      <color tags="primary elevatedButton" name="black">#000</color>
+      <color tags="secondary" name="blackWithOpacity">#000000cc</color>
+      <!--
+        The following would be invalid - a color name must be unique
+        i.e. not be specified twice.
+        If you need to assign a color value to multiple tags in the same
+        group, include them in a single entry, separated by whitespace.
+        <color tags="tertiary" name="blackWithOpacity">#000000cc</color>
+      -->
+    </group>
+  </theme>
+  <theme name="appTheme" mode="dark">
+    <color tags="primary surfaceTint" name="black">#000</color>
+    <color name="untagged">#12ABCC</color>
+    <group name="themeData">
+      <color tags="primary elevatedButton" name="white">#fff</color>
+      <color tags="secondary" name="whiteWithOpacity">#FFFFFFee</color>
+    </group>
+  </theme>
+</resources>

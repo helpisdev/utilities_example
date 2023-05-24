@@ -1,0 +1,79 @@
+targets:
+  $default:
+    builders:
+      build_web_compilers:entrypoint:
+        dev_options:
+          dart2js_args:
+            - --no-minify
+            - --show-package-warnings
+            - -O0
+            - --enable-diagnostic-colors
+            - --verbose
+            - --fatal-warnings
+        release_options:
+          dart2js_args:
+            - -O2
+            - --minify
+            - --fast-startup
+            - --csp
+      go_router_builder:
+        generate_for:
+          - lib
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - always_specify_types
+            - public_member_api_docs
+      bdd_widget_test|featureBuilder:
+        generate_for:
+          - test/*.feature
+          - packages/features/**/test/features/*.feature
+        options:
+          externalSteps:
+            - package:bdd_widget_test/step/i_see_text.dart
+            - package:bdd_widget_test/step/i_dont_see_text.dart
+            - package:bdd_widget_test/step/i_see_multiple_texts.dart
+            - package:bdd_widget_test/step/i_tap_text.dart
+            - package:bdd_widget_test/step/i_see_icon.dart
+            - package:bdd_widget_test/step/i_dont_see_icon.dart
+            - package:bdd_widget_test/step/i_tap_icon.dart
+            - package:bdd_widget_test/step/i_see_rich_text.dart
+            - package:bdd_widget_test/step/i_dont_see_rich_text.dart
+            - package:bdd_widget_test/step/i_see_widget.dart
+            - package:bdd_widget_test/step/i_dont_see_widget.dart
+            - package:bdd_widget_test/step/i_see_exactly_widgets.dart
+            - package:bdd_widget_test/step/i_see_multiple_widgets.dart
+            - package:bdd_widget_test/step/i_enter_into_input_field.dart
+            - package:bdd_widget_test/step/i_see_disabled_elevated_button.dart
+            - package:bdd_widget_test/step/i_see_enabled_elevated_button.dart
+            - package:bdd_widget_test/step/i_wait.dart
+            - package:bdd_widget_test/step/i_dismiss_the_page.dart
+      riverpod_generator:
+        generate_for:
+          - lib/**.dart
+          - packages/features/**/lib/**.dart
+      flutter_gen_runner:
+        enabled: true
+        generate_for:
+          - assets/**
+    sources:
+      - ./*
+      - $lib$
+      - $lib$/**
+      - lib/**
+      - $package$
+      - $package$/**
+      - $packages$
+      - $packages$/**
+      - packages/**
+      - packages/features/**/lib/**
+      - packages/features/**/test/**
+      - pubspec.yaml
+      - assets/
+      - assets/**
+      - web/**
+      - pubspec.*
+    dependencies:
+      - flutter_riverpod
+      - bdd_widget_test
+      - go_router
