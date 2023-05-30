@@ -1,31 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <theme name="appTheme" mode="light">
-    <!-- ungrouped colors -->
-    <color tags="primary surfaceTint" name="white">#ffffff</color>
-    <color name="untagged">#12ABCC</color>
+<!--
+  <color name="plain"                                                             >#D17D53</color>
+  <color name="material"                    type="material"                       >#874E32</color>
+  <color name="materialAccent"              type="material-accent"                >#5B8A8E</color>
+  <color name="materialAndMaterialAccent"   type="material material-accent"       >#0D494D</color>
+-->
+  <theme name="rust" mode="light">
+    <color tags="primary surfaceTint"  name="rust_opacity_100"          >#A6400FFF</color>
+    <color tags="onPrimary"            name="mistyRose_opacity_100"     >#F9E9E1FF</color>
+    <color tags="primaryContainer"     name="tan_opacity_100"           >#D1AA99FF</color>
+    <color tags="onPrimaryContainer"   name="masala_opacity_100"        >#473B36FF</color>
+    <color tags="secondary"            name="eden_opacity_100"          >#185358FF</color>
+    <color tags="onSecondary"          name="mystic_opacity_100"        >#E2ECECFF</color>
+    <color tags="secondaryContainer"   name="opal_opacity_100"          >#A3C4C7FF</color>
+    <color tags="onSecondaryContainer" name="capeCode_opacity_100"      >#394344FF</color>
+    <color tags="tertiary"             name="blueDianne_opacity_100"    >#144447FF</color>
+    <color tags="onTertiary"           name="platinum_opacity_100"      >#E2E9EAFF</color>
+    <color tags="tertiaryContainer"    name="halfBaked_opacity_100"     >#7FC0C4FF</color>
+    <color tags="onTertiaryContainer"  name="outerSpace_opacity_100"    >#2E4243FF</color>
+    <color tags="error"                name="shiraz_opacity_100"        >#B00020FF</color>
+    <color tags="onError"              name="wePeep_opacity_100"        >#FADFE4FF</color>
+    <color tags="errorContainer"       name="pigPink_opacity_100"       >#FCD8DFFF</color>
+    <color tags="onErrorContainer"     name="emperor_opacity_100"       >#504A4CFF</color>
+    <color tags="background"           name="alabaster_opacity_100"     >#F4EAE5FF</color>
+    <color tags="onBackground"         name="dune_opacity_100"          >#262423FF</color>
+    <color tags="surface"              name="potPourri_opacity_100"     >#F2E3DCFF</color>
+    <color tags="onSurface"            name="jet_opacity_100"           >#383533FF</color>
+    <color tags="surfaceVariant"       name="champagnePink_opacity_100" >#EBD5CBFF</color>
+    <color tags="onSurfaceVariant"     name="kabul_opacity_100"         >#524B47FF</color>
+    <color tags="outline"              name="sandDune_opacity_100"      >#766F6CFF</color>
+    <color tags="outlineVariant"       name="silverRust_opacity_100"    >#C0BDBBFF</color>
+    <color tags="shadow scrim"         name="black_opacity_100"         >#000000FF</color>
+    <color tags="inverseSurface"       name="nightRider_opacity_100"    >#261710FF</color>
+    <color tags="onInverseSurface"     name="chineseSilver_opacity_100" >#CBC8C6FF</color>
+    <color tags="inversePrimary"       name="flesh_opacity_100"         >#FFC7A8FF</color>
+    <group name="codeTheme">
+      <color tags="base"        name="portGore"        >#1A1F4AFF</color>
+      <color tags="objectClass" name="purple"          >#7B00A7FF</color>
+      <color tags="comment"     name="woodland"        >#546428FF</color>
+      <color tags="constant"    name="romanCoffeeBrown">#795548FF</color>
+      <color tags="keyword"     name="mediumRedViolet" >#AA228EFF</color>
+      <color tags="number"      name="indigo"          >#485EC3FF</color>
+      <color tags="punctuation" name="bigStone"        >#131736FF</color>
+      <color tags="string"      name="oliveDrab"       >#6B9B26FF</color>
+    </group>
     <group name="themeData">
-      <!--
-        Tag names in a group won't clash with ungrouped colors or colors in
-        other groups. In a sense they are namespaced.
-      -->
-      <color tags="primary elevatedButton" name="black">#000</color>
-      <color tags="secondary" name="blackWithOpacity">#000000cc</color>
-      <!--
-        The following would be invalid - a color name must be unique
-        i.e. not be specified twice.
-        If you need to assign a color value to multiple tags in the same
-        group, include them in a single entry, separated by whitespace.
-        <color tags="tertiary" name="blackWithOpacity">#000000cc</color>
-      -->
+      <color tags="primaryColor indicatorColor" name="rust_opacity_100"         >#A6400FFF</color>
+      <color tags="primaryDark"                 name="sealBrown_opacity_100"    >#632609FF</color>
+      <color tags="primaryLight"                name="antiqueBrass_opacity_100" >#C98C6FFF</color>
+      <color tags="secondaryHeader"             name="pantone_opacity_100"      >#EDD8CFFF</color>
+      <color tags="canvas"                      name="alabaster_opacity_100"    >#F4EAE5FF</color>
+      <color tags="card dialog"                 name="potPourri_opacity_100"    >#F2E3DCFF</color>
+      <color tags="scaffoldBackground"          name="cultured_opacity_100"     >#FAF6F3FF</color>
+      <color tags="dividerColor"                name="black_opacity_12"         >#0000001F</color>
+      <color tags="disabledColor"               name="cafeNoir_opacity_37"      >#4E372B5E</color>
+      <color tags="hoverColor highlightColor"   name="brownSugar_opacity_10"    >#BC6F4B19</color>
+      <color tags="focusColor"                  name="copperRed_opacity_30"     >#C078564C</color>
+      <color tags="splashColor"                 name="brownCrayola_opacity_20"  >#B0572C33</color>
+      <color tags="shadowColor"                 name="black_opacity_100"        >#000000FF</color>
+      <color tags="hintColor"                   name="black_opacity_60"         >#00000099</color>
+      <color tags="unselectedWidget"            name="black_opacity_54"         >#0000008A</color>
+    </group>
+    <group name="componentsAndInteractions">
+      <color tags="elevatedButton outlinedButton
+                  textButton dialogBackground
+                  card"
+                                                   name="potPourri_opacity_100"      >#F2E3DCFF</color>
+      <color tags="filledButton toggleButtons
+                  checkbox radio chips
+                  inputDecorator tabBarItem
+                  tabBarIndicator
+                  bottomNavigationBarSelected
+                  navigationBarSelected
+                  navigationRailSelected"
+                                                   name="rust_opacity_100"           >#A6400FFF</color>
+      <color tags="tonalButton"                    name="opal_opacity_100"           >#A3C4C7FF</color>
+      <color tags="toggleSwitch"                   name="mistyRose_opacity_100"      >#F9E9E1FF</color>
+      <color tags="floatingActionButton"           name="tan_opacity_100"            >#D1AA99FF</color>
+      <color tags="circleAvatar"                   name="sealBrown_opacity_100"      >#632609FF</color>
+      <color tags="tooltip"                        name="brownChocolate_opacity_100" >#532240FF</color>
+      <color tags="appBar"                         name="potPourri_opacity_98"       >#F2E3DCFA</color>
+      <color tags="snackBarBackground"             name="darkBrown_opacity_93"       >#693922ED</color>
+      <color tags="bottomNavigationBarBackground"  name="alabaster_opacity_98"       >#F4EAE5FA</color>
+      <color tags="navigationBarBackground"        name="champagnePink_opacity_100"  >#EBD5CBFF</color>
+      <color tags="navigationBarIndicator
+                  navigationRailIndicator"
+                                                   name="rust_opacity_24"            >#A6400F3D</color>
+      <color tags="navigationRailBackground"       name="alabaster_opacity_100"      >#F4EAE5FF</color>
+      <color tags="textTheme"                      name="rootBeer_opacity_95"        >#2A1003F2</color>
+      <color tags="primaryTextTheme"               name="fantasy_opacity_100"        >#F7EEEAFF</color>
+      <color tags="disabledColor"                  name="cafeNoir_opacity_37"        >#4E372B5E</color>
+      <color tags="hoverColor highlightColor"
+                                                   name="brownSugar_opacity_10"      >#BC6F4B19</color>
+      <color tags="focusColor"                     name="copperRed_opacity_30"       >#C078564C</color>
+      <color tags="splashColor"                    name="brownCrayola_opacity_20"    >#B0572C33</color>
     </group>
   </theme>
-  <theme name="appTheme" mode="dark">
-    <color tags="primary surfaceTint" name="black">#000</color>
-    <color name="untagged">#12ABCC</color>
+  <theme name="rust" mode="dark">
+    <color tags="primary surfaceTint"  name="eunry_opacity_100"           >#D3AE9DFF</color>
+    <color tags="onPrimary"            name="zeus_opacity_100"            >#282320FF</color>
+    <color tags="primaryContainer"     name="metallicBrown_opacity_100"   >#AA481AFF</color>
+    <color tags="onPrimaryContainer"   name="almond_opacity_100"          >#F5D7C8FF</color>
+    <color tags="secondary"            name="towerGray_opacity_100"       >#A7C6C9FF</color>
+    <color tags="onSecondary"          name="darkGunmetal_opacity_100"    >#222727FF</color>
+    <color tags="secondaryContainer"   name="darkSlateGray_opacity_100"   >#225B5FFF</color>
+    <color tags="onSecondaryContainer" name="geyser_opacity_100"          >#CBDDDEFF</color>
+    <color tags="tertiary"             name="darkSkyBlue_opacity_100"     >#85C2C6FF</color>
+    <color tags="onTertiary"           name="charlestonGreen_opacity_100" >#1C2627FF</color>
+    <color tags="tertiaryContainer"    name="japaneseIndigo_opacity_100"  >#1F4C4FFF</color>
+    <color tags="onTertiaryContainer"  name="tiara_opacity_100"           >#CAD8D9FF</color>
+    <color tags="error"                name="cranberry_opacity_100"       >#CF6679FF</color>
+    <color tags="onError"              name="craterBrown_opacity_100"     >#28181AFF</color>
+    <color tags="errorContainer"       name="nightShadz_opacity_100"      >#B1384EFF</color>
+    <color tags="onErrorContainer"     name="azalea_opacity_100"          >#F8D2D9FF</color>
+    <color tags="background"           name="cocoaBrown_opacity_100"      >#231F1DFF</color>
+    <color tags="onBackground"         name="alto_opacity_100"            >#DCDBDBFF</color>
+    <color tags="surface"              name="pineTree_opacity_100"        >#2D2725FF</color>
+    <color tags="onSurface"            name="swirl_opacity_100"           >#CDCCCBFF</color>
+    <color tags="surfaceVariant"       name="blackCoffee_opacity_100"     >#3A322FFF</color>
+    <color tags="onSurfaceVariant"     name="nobel_opacity_100"           >#B9B6B5FF</color>
+    <color tags="outline"              name="gray_opacity_100"            >#918D8DFF</color>
+    <color tags="outlineVariant"       name="mineShaft_opacity_100"       >#434242FF</color>
+    <color tags="shadow scrim"         name="black_opacity_100"           >#000000FF</color>
+    <color tags="inverseSurface"       name="dawnPink_opacity_100"        >#F8F3F0FF</color>
+    <color tags="onInverseSurface"     name="tuatara_opacity_100"         >#3A3938FF</color>
+    <color tags="inversePrimary"       name="pineCone_opacity_100"        >#74625AFF</color>
+
+    <group name="codeTheme">
+      <color tags="base"        name="janna"         >#F4EDD3FF</color>
+      <color tags="objectClass" name="silverTree"    >#55C898FF</color>
+      <color tags="comment"     name="greenSmoke"    >#A5BC68FF</color>
+      <color tags="constant"    name="lightWisteria" >#C69DD4FF</color>
+      <color tags="keyword"     name="cornflowerBlue">#74A5F0FF</color>
+      <color tags="number"      name="coriander"     >#BECB9EFF</color>
+      <color tags="punctuation" name="parchment"     >#EFE8D1FF</color>
+      <color tags="string"      name="tumbleweed"    >#D4A286FF</color>
+    </group>
     <group name="themeData">
-      <color tags="primary elevatedButton" name="white">#fff</color>
-      <color tags="secondary" name="whiteWithOpacity">#FFFFFFee</color>
+      <color tags="primaryColor indicatorColor" name="pastelPink_opacity_100"         >#D3AE9DFF</color>
+      <color tags="primaryDark"                 name="deepTaupe_opacity_100"          >#746056FF</color>
+      <color tags="primaryLight"                name="dustStorm_opacity_100"          >#E2CABFFF</color>
+      <color tags="secondaryHeader"             name="oliveDrabCamouflage_opacity_100">#54453EFF</color>
+      <color tags="canvas"                      name="cocoaBrown_opacity_100"         >#231F1DFF</color>
+      <color tags="card dialog"                 name="pineTree_opacity_100"           >#2D2725FF</color>
+      <color tags="scaffoldBackground"          name="eerieBlack_opacity_100"         >#1B1918FF</color>
+      <color tags="dividerColor"                name="white_opacity_12"               >#FFFFFF1F</color>
+      <color tags="disabledColor"               name="pastelGray_opacity_37"          >#CEC6C15E</color>
+      <color tags="hoverColor highlightColor"   name="desertSand_opacity_10"          >#DEC2B519</color>
+      <color tags="focusColor"                  name="bone_opacity_30"                >#E0C6BA4C</color>
+      <color tags="splashColor"                 name="darkVanilla_opacity_20"         >#D8B7A833</color>
+      <color tags="shadowColor"                 name="black_opacity_100"              >#000000FF</color>
+      <color tags="hintColor"                   name="white_opacity_60"               >#FFFFFF99</color>
+      <color tags="unselectedWidget"            name="white_opacity_70"               >#FFFFFFB3</color>
+    </group>
+    <group name="componentsAndInteractions">
+      <color tags="elevatedButton outlinedButton
+                  textButton dialogBackground
+                  card"
+                                                   name="pineTree_opacity_100"       >#2D2725FF</color>
+      <color tags="filledButton toggleButtons
+                  checkbox radio chips
+                  inputDecorator tabBarItem
+                  tabBarIndicator
+                  bottomNavigationBarSelected
+                  navigationBarSelected
+                  navigationRailSelected"
+                                                   name="pastelPink_opacity_100"     >#D3AE9DFF</color>
+      <color tags="tonalButton"                    name="darkSlateGray_opacity_100"  >#225B5FFF</color>
+      <color tags="toggleSwitch"                   name="raisinBlack_opacity_100"    >#282320FF</color>
+      <color tags="floatingActionButton"           name="metallicBrown_opacity_100"  >#AA481AFF</color>
+      <color tags="circleAvatar"                   name="dustStorm_opacity_100"      >#E2CABFFF</color>
+      <color tags="tooltip"                        name="whiteChocolate_opacity_100" >#EDDFD8FF</color>
+      <color tags="appBar"                         name="pineTree_opacity_98"        >#2D2725FA</color>
+      <color tags="snackBarBackground"             name="paleSilver_opacity_95"      >#CFC0B9F2</color>
+      <color tags="bottomNavigationBarBackground"  name="cocoaBrown_opacity_98"      >#231F1DFA</color>
+      <color tags="navigationBarBackground"        name="blackCoffee_opacity_100"    >#3A322EFF</color>
+      <color tags="navigationBarIndicator
+                  navigationRailIndicator"
+                                                   name="pastelPink_opacity_24"      >#D3AE9D3D</color>
+      <color tags="navigationRailBackground"       name="cocoaBrown_opacity_100"     >#231F1DFF</color>
+      <color tags="textTheme"                      name="isabelline_opacity_100"     >#F6EEEBFF</color>
+      <color tags="primaryTextTheme"               name="vampireBlack_opacity_95"    >#090807F2</color>
+      <color tags="disabledColor"                  name="pastelGray_opacity_37"      >#CEC6C15E</color>
+      <color tags="hoverColor highlightColor"
+                                                   name="desertSand_opacity_10"      >#DEC2B519</color>
+      <color tags="focusColor"                     name="bone_opacity_30"            >#E0C6BA4C</color>
+      <color tags="splashColor"                    name="darkVanilla_opacity_20"     >#D8B7A833</color>
     </group>
   </theme>
 </resources>
+

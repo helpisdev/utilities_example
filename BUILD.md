@@ -1,10 +1,11 @@
 # Build Steps
 
-Once you have followed the instructions to complete the dependencies installation process, run th code generation:
+Once you have followed the instructions to complete the `Getting Started` section in [README.md](README.md), run the code generation:
 
 ```bash
 dart pub global activate derry
 derry gen:build:complete
+flutter gen-l10n
 ```
 
 ----------
@@ -13,7 +14,7 @@ Finally, build for your platform:
 ## Android
 
 ```bash
-flutter build apk --multidex --obfuscate --split-debug-info=build/utilities_example/outputs/symbols --split-per-abi  --release
+flutter build apk --multidex --obfuscate --split-debug-info=build/utilities_example/outputs/symbols --split-per-abi --release --flavor production
 ```
 
 ----------
@@ -21,7 +22,7 @@ flutter build apk --multidex --obfuscate --split-debug-info=build/utilities_exam
 ## Linux
 
 ```bash
-flutter build linux --obfuscate --split-debug-info=build/utilities_example/outputs/symbols --release
+flutter build linux --obfuscate --split-debug-info=build/utilities_example/production/outputs/symbols --release
 ```
 
 ----------
@@ -29,7 +30,7 @@ flutter build linux --obfuscate --split-debug-info=build/utilities_example/outpu
 ## Web
 
 ```bash
-flutter build web --dart2js-optimization 04 --release --csp
+flutter build web --dart2js-optimization O4 --release --csp
 ```
 
 ----------
@@ -41,3 +42,5 @@ To install run:
 ```bash
 flutter install
 ```
+
+> The project has not been tested for `windows`, `iOS` and `macos`

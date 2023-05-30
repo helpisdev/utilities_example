@@ -29,7 +29,7 @@
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
-	  <true/>
+    <true/>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
@@ -45,20 +45,40 @@
     </array>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
+    <!-- Specify locales -->
     <key>CFBundleLocalizations</key>
     <array>
       <string>en</string>
+      <string>el</string>
     </array>
+    <!-- Add query schemes to be able to launch these uri schemes as well. -->
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>sms</string>
       <string>tel</string>
     </array>
-  </dict>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
+    <!-- Non https streaming - plain http -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <!-- Background audio support -->
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>Listen to streaming and podcast programs with the screen turned off</string>
+    </array>
+    <!-- Permission to play music files -->
+    <key>NSAppleMusicUsageDescription</key>
+    <string>Streaming and Podcast programs</string>
+    <!-- Permission to use media library to download podcasts -->
+    <key>kTCCServiceMediaLibrary</key>
+    <string>Download podcasts to listen to later</string>
+    <!-- Bluetooth support -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Listen to streaming and podcast programs on an external audio player device.</string>
+    <!-- Deprecated Bluetooth support - used for older devices -->
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>Listen to streaming and podcast programs on an external audio player device.</string>
   </dict>
 </plist>
-

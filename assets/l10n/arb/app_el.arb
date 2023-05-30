@@ -1,0 +1,82 @@
+{
+  "@@locale": "el",
+  "animateTheSnackbar": "Κινήστε το Snackbar!",
+  "appName": "utilities_example",
+  "awesome": "Καταπληκτικά!",
+  "changeLocale": "Η τρέχουσα ρύθμιση γλώσσας είναι {locale}",
+  "@changeLocale": {
+    "placeholders": {
+      "locale": {
+        "type": "String"
+      }
+    }
+  },
+  "darkTheme": "Σκοτεινό",
+  "gotIt": "Κατάλαβα",
+  "lightTheme": "Φωτεινό",
+  "pausePlayback": "Παύση της τρέχουσας αναπαραγωγής ραδιοφωνικού σταθμού.",
+  "playPlayback": "Ακρόαση του επιλεγμένου ραδιοφωνικού σταθμού.",
+  "price": "Τιμή: ",
+  "product10Description": "Τραγανά, γλυκά δαμάσκηνα τέλεια για σνακ ή μαγείρεμα.",
+  "product10Title": "Δαμάσκηνα",
+  "product1Description": "Φρέσκα μήλα, πωλούνται ανά κιλό.",
+  "product1Title": "Μήλα",
+  "product2Description": "Ώριμες μπανάνες, τέλειες για smoothies ή σνακ.",
+  "product2Title": "Μπανάνες",
+  "product3Description": "Γλυκές, χυμώδεις φράουλες. Καλλιεργημένες τοπικά.",
+  "product3Title": "Φράουλες",
+  "product4Description": "Εισαγόμενες μάγγες, έτοιμες να φαγωθούν ή να χρησιμοποιηθούν σε συνταγές.",
+  "product4Title": "Μάγγες",
+  "product5Description": "Πλούσια, νόστιμα μύρτιλα. Πλούσια σε αντιοξειδωτικά.",
+  "product5Title": "Μύρτιλα",
+  "product6Description": "Φρέσκα μαλίνα. Τέλεια για επιδόρπια ή γιαούρτι.",
+  "product6Title": "Μαλίνα",
+  "product7Description": "Βατόμουρα φρεσκομαζεμένα. Περιορισμένη εποχική διαθεσιμότητα.",
+  "product7Title": "Βατόμουρα",
+  "product8Description": "Γλυκά κεράσια Bing. Διαθέσιμα μόνο για λίγο κάθε καλοκαίρι.",
+  "product8Title": "Κεράσια",
+  "product9Description": "Ωριμασμένα στο δέντρο ροδάκινα. Χυμώδεις, γλυκές και αφράτες.",
+  "product9Title": "Ροδάκινα",
+  "productPageForId": "Σελίδα προϊόντος για: {id}",
+  "@productPageForId": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "routeOpeningTitle": "Παράδειγμα Utilities",
+  "routeProductsListTitle": "Κατάλογος Προϊόντων",
+  "routeProductTitle": "Προϊόν {id}",
+  "@routeProductTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "routeSettingsTitle": "Ρυθμίσεις",
+  "skipToNext": "Προχωρήστε στον επόμενο ραδιοφωνικό σταθμό.",
+  "skipToPrevious": "Προχωρήστε στον προηγούμενο ραδιοφωνικό σταθμό.",
+  "sku": "SKU: {id}",
+  "@sku": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "snackbarMessage": "Τώρα χρησιμοποιήστε το συρτάρι για να ανακαλύψετε περισσότερες κουλ λειτουργίες.",
+  "stream1Title": "Καταπληκτικό Ρεύμα",
+  "stream2Title": "Εκπομπή Συζήτησης",
+  "stream3Title": "70's & 80's του Joe",
+  "switchTheme": "Εναλλαγή σε {mode} Θέμα",
+  "@switchTheme": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "welcome": "Καλώς ήρθατε στην επίδειξη του πακέτου Utilities!"
+}

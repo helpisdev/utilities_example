@@ -1,8 +1,11 @@
-arb-dir: assets/l10n
+arb-dir: assets/l10n/arb
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
-output-class: UtilitiesExampleLocalizations
+output-class: AppLocalizations
 nullable-getter: false
 use-deferred-loading: true
 synthetic-package: false
-output-dir: lib/src/l10n
+output-dir: lib/src/gen/l10n
+preferred-supported-locales:
+  - en
+  - el

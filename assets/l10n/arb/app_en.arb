@@ -1,0 +1,82 @@
+{
+  "@@locale": "en",
+  "animateTheSnackbar": "Animate the Snackbar!",
+  "appName": "utilities_example",
+  "awesome": "Awesome!",
+  "changeLocale": "Current locale is {locale}",
+  "@changeLocale": {
+    "placeholders": {
+      "locale": {
+        "type": "String"
+      }
+    }
+  },
+  "darkTheme": "Dark",
+  "gotIt": "Got it",
+  "lightTheme": "Light",
+  "pausePlayback": "Pause the current radio station playback.",
+  "playPlayback": "Listen to the chosen radio station.",
+  "price": "Price: ",
+  "product10Description": "Tart, sweet plums perfect for snacking or baking.",
+  "product10Title": "Plums",
+  "product1Description": "Fresh apples, sold by the pound.",
+  "product1Title": "Apples",
+  "product2Description": "Ripe bananas, perfect for smoothies or snacks.",
+  "product2Title": "Bananas",
+  "product3Description": "Sweet, juicy strawberries. Grown locally.",
+  "product3Title": "Strawberries",
+  "product4Description": "Imported mangos, ready to eat or used in recipes.",
+  "product4Title": "Mangos",
+  "product5Description": "Plump, delicious blueberries. High in antioxidants.",
+  "product5Title": "Blueberries",
+  "product6Description": "Fresh raspberries. Perfect for desserts or yogurt.",
+  "product6Title": "Raspberries",
+  "product7Description": "Blackberries freshly picked. Limited seasonal availability.",
+  "product7Title": "Blackberries",
+  "product8Description": "Sweet Bing cherries. Only available for a short time each summer.",
+  "product8Title": "Cherries",
+  "product9Description": "Tree-ripened peaches. Juicy, sweet, and fuzzy.",
+  "product9Title": "Peaches",
+  "productPageForId": "Product page for: {id}",
+  "@productPageForId": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "routeOpeningTitle": "Utilities Example",
+  "routeProductsListTitle": "Products Catalog",
+  "routeProductTitle": "Product {id}",
+  "@routeProductTitle": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "routeSettingsTitle": "Settings",
+  "skipToNext": "Skip to next radio station.",
+  "skipToPrevious": "Skip to previous radio station.",
+  "sku": "SKU: {id}",
+  "@sku": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "snackbarMessage": "Now use the drawer to discover more cool features.",
+  "stream1Title": "Awesome Stream",
+  "stream2Title": "Talking Show",
+  "stream3Title": "Joe's '70's & '80's",
+  "switchTheme": "Switch to {mode} Theme",
+  "@switchTheme": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "welcome": "Welcome to the Utilities package Demo!"
+}

@@ -18,7 +18,7 @@ targets:
             - --csp
       go_router_builder:
         generate_for:
-          - lib
+          - lib/**.dart
       source_gen|combining_builder:
         options:
           ignore_for_file:
@@ -48,32 +48,24 @@ targets:
             - package:bdd_widget_test/step/i_see_enabled_elevated_button.dart
             - package:bdd_widget_test/step/i_wait.dart
             - package:bdd_widget_test/step/i_dismiss_the_page.dart
-      riverpod_generator:
-        generate_for:
-          - lib/**.dart
-          - packages/features/**/lib/**.dart
-      flutter_gen_runner:
-        enabled: true
-        generate_for:
-          - assets/**
     sources:
-      - ./*
-      - $lib$
-      - $lib$/**
-      - lib/**
-      - $package$
-      - $package$/**
-      - $packages$
-      - $packages$/**
-      - packages/**
-      - packages/features/**/lib/**
-      - packages/features/**/test/**
-      - pubspec.yaml
-      - assets/
-      - assets/**
-      - web/**
-      - pubspec.*
+      include:
+        - ./*
+        - $lib$
+        - $lib$/**
+        - lib/**
+        - $package$
+        - $package$/**
+        - $packages$
+        - $packages$/**
+        - packages/**
+        - packages/features/**/lib/**
+        - packages/features/**/test/**
+        - pubspec.yaml
+        - assets/
+        - assets/**
+        - web/**
+        - pubspec.*
     dependencies:
-      - flutter_riverpod
       - bdd_widget_test
       - go_router
