@@ -10,14 +10,17 @@ import 'screens/settings.dart';
 part 'routes.g.dart';
 
 extension AppRouteProvider on BuildContext {
-  AppRoute get currentRoute =>
-      AppRoute.fromLocation(this, GoRouter.of(this).location);
+  AppRoute get currentRoute => AppRoute.fromLocation(
+        this,
+        GoRouterState.of(this).uri.toString(),
+      );
 }
 
 enum RoutingMethod {
   go,
   push,
   pushReplacement,
+  replace,
 }
 
 // Would be nice if this was made part of the library but sealed types cannot
@@ -57,13 +60,13 @@ sealed class AppRoute extends ScreenRoute {
     } else if (const ProductListRoute().matchesLocation(location)) {
       return const ProductListRoute();
     } else {
-      final String id = GoRouter.of(context)
-          .routeInformationProvider
-          .value
-          .uri
-          .pathSegments
-          .last;
-      return ProductRoute(id: int.parse(id));
+      final int? id = int.tryParse(
+        GoRouterState.of(context).uri.pathSegments.last,
+      );
+      if (id == null) {
+        return const ProductListRoute();
+      }
+      return ProductRoute(id: id);
     }
   }
 }
@@ -87,7 +90,7 @@ class OpeningRoute extends AppRoute {
   String title(final BuildContext context) => context.l10n.routeOpeningTitle;
 
   @override
-  RouteBuilder get builder => (
+  RouteScreenBuilder get builder => (
         final BuildContext context,
         final GoRouterState state,
       ) =>
@@ -113,6 +116,9 @@ class OpeningRoute extends AppRoute {
       case RoutingMethod.pushReplacement:
         pushReplacement(context);
         break;
+      case RoutingMethod.replace:
+        replace(context);
+        break;
     }
     return null;
   }
@@ -125,7 +131,7 @@ class SettingsRoute extends AppRoute {
   String title(final BuildContext context) => context.l10n.routeSettingsTitle;
 
   @override
-  RouteBuilder get builder => (
+  RouteScreenBuilder get builder => (
         final BuildContext context,
         final GoRouterState state,
       ) =>
@@ -151,6 +157,9 @@ class SettingsRoute extends AppRoute {
       case RoutingMethod.pushReplacement:
         pushReplacement(context);
         break;
+      case RoutingMethod.replace:
+        replace(context);
+        break;
     }
     return null;
   }
@@ -164,7 +173,7 @@ class ProductListRoute extends AppRoute {
       context.l10n.routeProductsListTitle;
 
   @override
-  RouteBuilder get builder => (
+  RouteScreenBuilder get builder => (
         final BuildContext context,
         final GoRouterState state,
       ) =>
@@ -190,6 +199,9 @@ class ProductListRoute extends AppRoute {
       case RoutingMethod.pushReplacement:
         pushReplacement(context);
         break;
+      case RoutingMethod.replace:
+        replace(context);
+        break;
     }
     return null;
   }
@@ -205,7 +217,7 @@ class ProductRoute extends AppRoute {
       context.l10n.routeProductTitle(id);
 
   @override
-  RouteBuilder get builder => (
+  RouteScreenBuilder get builder => (
         final BuildContext context,
         final GoRouterState state,
       ) =>
@@ -230,6 +242,9 @@ class ProductRoute extends AppRoute {
         return push<T>(context);
       case RoutingMethod.pushReplacement:
         pushReplacement(context);
+        break;
+      case RoutingMethod.replace:
+        replace(context);
         break;
     }
     return null;

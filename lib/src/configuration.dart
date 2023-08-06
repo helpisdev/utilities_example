@@ -42,8 +42,10 @@ AdaptiveAppBar configureAppBar(final BuildContext context) {
         fontFamily: GoogleFonts.comfortaa().fontFamily,
       ),
     ),
-    backButtonStyle: iconStyle,
-    trailing: <Widget>[SwitchThemeButton(iconStyle: iconStyle)],
+    gtkSpecificOptions: GTKAppBarSpecificOptions(
+      backButtonStyle: iconStyle,
+      trailing: <Widget>[SwitchThemeButton(iconStyle: iconStyle)],
+    ),
   );
 }
 
@@ -89,10 +91,12 @@ final Logger logger = Logger(
   printer: PrefixPrinter(
     PrettyPrinter(methodCount: 15, printTime: true),
     debug: 'DEBUG',
-    verbose: 'VERBOSE',
+    trace: 'TRACE',
     info: 'INFO',
     warning: 'WARNING',
     error: 'ERROR',
-    wtf: 'WTF',
+    fatal: 'FATAL',
   ),
 );
+
+bool get configureGTK => Platform.isDesktop && !Platform.isWeb;

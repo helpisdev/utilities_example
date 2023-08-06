@@ -38,11 +38,36 @@ class PlayerConfig {
       }) async =>
           switch (level) {
             JAMPV_LogLevel.none => null,
-            JAMPV_LogLevel.error => logger.e(message, error, stackTrace),
-            JAMPV_LogLevel.warning => logger.w(message, error, stackTrace),
-            JAMPV_LogLevel.info => logger.i(message, error, stackTrace),
-            JAMPV_LogLevel.verbose => logger.v(message, error, stackTrace),
-            JAMPV_LogLevel.debug => logger.d(message, error, stackTrace),
+            JAMPV_LogLevel.error => logger.e(
+                message,
+                error: error,
+                time: DateTime.now(),
+                stackTrace: stackTrace,
+              ),
+            JAMPV_LogLevel.warning => logger.w(
+                message,
+                error: error,
+                time: DateTime.now(),
+                stackTrace: stackTrace,
+              ),
+            JAMPV_LogLevel.info => logger.i(
+                message,
+                error: error,
+                time: DateTime.now(),
+                stackTrace: stackTrace,
+              ),
+            JAMPV_LogLevel.verbose => logger.t(
+                message,
+                error: error,
+                time: DateTime.now(),
+                stackTrace: stackTrace,
+              ),
+            JAMPV_LogLevel.debug => logger.d(
+                message,
+                error: error,
+                time: DateTime.now(),
+                stackTrace: stackTrace,
+              ),
           };
     } else {
       logger.e(

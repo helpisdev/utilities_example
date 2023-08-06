@@ -27,44 +27,39 @@ class OpeningScreenState extends ScreenState<OpeningScreen> {
   bool visible = true;
   late final Widget _welcome = Welcome(showSnackBar: showSnackbar);
 
-  late GoRouterAdaptiveScaffoldConfig scaffoldConfig;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    scaffoldConfig = configureAdaptiveScaffold(
-      context: context,
-      onDrawerChanged: (final bool isOpened) =>
-          setState(() => visible = !isOpened),
-      bodyConfig: GoRouterBodyConfig(
-        body: (final _, [final __]) => _welcome,
-        small: (final BuildContext context, [final __]) {
-          const PredefinedBreakpoint small = PredefinedBreakpoint.smallAndDown;
-          final Breakpoint mobileDevice = small.withPlatform(DeviceType.mobile);
-          if (mobileDevice.isActive(context)) {
-            return SafeArea(
-              child: SizedBox(
-                width: context.width,
-                height: context.height,
-                child: Stack(
-                  fit: StackFit.passthrough,
-                  children: <Widget>[
-                    _welcome,
-                    Positioned(
-                      bottom: 0,
-                      width: context.width,
-                      child: const TrackPlayer(),
-                    ),
-                  ],
-                ),
-              ),
+  GoRouterAdaptiveScaffoldConfig get scaffoldConf => configureAdaptiveScaffold(
+        context: context,
+        onDrawerChanged: (final bool open) => setState(() => visible = !open),
+        bodyConfig: GoRouterBodyConfig(
+          body: (final _, [final __]) => _welcome,
+          small: (final BuildContext context, [final __]) {
+            const PredefinedBreakpoint s = PredefinedBreakpoint.smallAndDown;
+            final Breakpoint mobileDevice = s.withPlatform(
+              DeviceType.mobile,
             );
-          }
-          return _welcome;
-        },
-      ),
-    );
-  }
+            if (mobileDevice.isActive(context)) {
+              return SafeArea(
+                child: SizedBox(
+                  width: context.width,
+                  height: context.height,
+                  child: Stack(
+                    fit: StackFit.passthrough,
+                    children: <Widget>[
+                      _welcome,
+                      Positioned(
+                        bottom: 0,
+                        width: context.width,
+                        child: const TrackPlayer(),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+            return _welcome;
+          },
+        ),
+      );
 
   @override
   Screen build(final BuildContext context) {
@@ -72,7 +67,7 @@ class OpeningScreenState extends ScreenState<OpeningScreen> {
     final Breakpoint desktop = standard.withPlatform(DeviceType.desktop);
     final StatelessScreen base = StatelessScreen(
       state: widget.state,
-      adaptiveScaffoldConfig: scaffoldConfig,
+      adaptiveScaffoldConfig: scaffoldConf,
     );
     return desktop.isActive(context)
         ? RadioPlayerBuilder<StatelessScreen>(
@@ -130,7 +125,7 @@ class OpeningScreenState extends ScreenState<OpeningScreen> {
       ..add(
         DiagnosticsProperty<GoRouterAdaptiveScaffoldConfig>(
           'scaffoldConfig',
-          scaffoldConfig,
+          scaffoldConf,
         ),
       );
   }

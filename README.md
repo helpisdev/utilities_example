@@ -85,7 +85,7 @@ You can find instructions on how to install those on their respected websites:
 - `util.ensureInitialized()` to initialize utilities dependencies
 - `util.PermissionHandler` to request permissions
 
-#### From `adaptive_scaffold
+#### From `adaptive_scaffold`
 
 - `AdaptiveScaffold` which provides a responsive layout for web, desktop and mobile
 - `GTKManager` to initialize GTK on desktop

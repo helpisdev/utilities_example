@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:utilities/extensions.dart';
 
 /// Signature for the integer value of a color.
 typedef ColorValue = int;
@@ -218,6 +219,10 @@ enum EnhancedThemeMode {
 
   /// The opposite [EnhancedThemeMode].
   EnhancedThemeMode get oppositeEnhanced => this == dark ? light : dark;
+
+  /// Returns the [EhnancedThemeMode] of the current brightness.
+  static EnhancedThemeMode fromBrightness(final BuildContext context) =>
+      context.isDarkMode ? dark : light;
 
   /// Transforms a [String] to a valid [EnhancedThemeMode].
   static EnhancedThemeMode of(final String? name) {
@@ -2646,7 +2651,7 @@ class RustDarkThemeComponentsAndInteractionsGroup
   EnhancedColor get splashColor => super.colors['darkVanillaOpacity20']!;
 }
 
-/// Theme color properties of UtilitiesExample.
+/// Theme color properties of [AppTheme].
 class UtilitiesExampleColors extends ThemeExtension<UtilitiesExampleColors> {
   const UtilitiesExampleColors(this.theme);
 
@@ -2690,53 +2695,23 @@ class Theming extends StatefulWidget {
   State<Theming> createState() => _ThemingState();
 }
 
+@Deprecated('Use AppTheme typedef instead.')
 typedef UtilitiesExampleEnhancedTheme
     = UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>;
+typedef AppTheme = UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>;
 
 class _ThemingState extends State<Theming> {
-  ThemeMode mode = ThemeMode.light;
-  EnhancedThemeMode _enhancedThemeMode = EnhancedThemeMode.light;
-  UtilitiesExampleEnhancedTheme light = UtilitiesExampleTheme.rustLightTheme;
-  UtilitiesExampleEnhancedTheme dark = UtilitiesExampleTheme.rustDarkTheme;
+  late EnhancedThemeMode _enhancedThemeMode;
+  late ThemeMode mode;
+  AppTheme light = AppTheme.rustLightTheme;
+  AppTheme dark = AppTheme.rustDarkTheme;
 
-  void changeTheme({
-    final UtilitiesExampleEnhancedTheme? theme,
-    final EnhancedThemeMode? mode,
-  }) {
-    if (theme != null) {
-      setState(
-        () {
-          final EnhancedThemeMode themeMode = theme.themeData.mode;
-          switch (themeMode) {
-            case EnhancedThemeMode.light:
-              light = theme;
-              break;
-            case EnhancedThemeMode.dark:
-              dark = theme;
-              break;
-          }
-          this.mode = themeMode.equivalent;
-        },
-      );
-    }
-    if (mode != null) {
-      setState(
-        () {
-          _enhancedThemeMode = mode;
-          this.mode = _enhancedThemeMode.equivalent;
-        },
-      );
-    }
+  @override
+  void initState() {
+    super.initState();
+    _enhancedThemeMode = EnhancedThemeMode.fromBrightness(context);
+    mode = _enhancedThemeMode.equivalent;
   }
-
-  EnhancedThemeMode get enhancedThemeMode => _enhancedThemeMode;
-  set enhancedThemeMode(final EnhancedThemeMode mode) {
-    changeTheme(mode: mode);
-  }
-
-  void switchTheme() => changeTheme(
-        mode: EnhancedThemeMode.of(enhancedThemeMode.opposite.name),
-      );
 
   @override
   Widget build(final BuildContext context) => ThemeProvider(
@@ -2747,24 +2722,34 @@ class _ThemingState extends State<Theming> {
         child: widget.child,
       );
 
+  void changeTheme({final AppTheme? theme, final EnhancedThemeMode? mode}) {
+    if (theme != null) {
+      setState(
+        () {
+          final EnhancedThemeMode themeMode = theme.themeData.mode;
+          themeMode == EnhancedThemeMode.light ? light = theme : dark = theme;
+          this.mode = themeMode.equivalent;
+        },
+      );
+    }
+    if (mode != null) {
+      setState(() => this.mode = (_enhancedThemeMode = mode).equivalent);
+    }
+  }
+
+  EnhancedThemeMode get enhancedThemeMode => _enhancedThemeMode;
+  set enhancedThemeMode(final EnhancedThemeMode mode) {
+    changeTheme(mode: mode);
+  }
+
+  void switchTheme() => changeTheme(mode: enhancedThemeMode.oppositeEnhanced);
+
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        DiagnosticsProperty<
-            UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>>(
-          'dark',
-          dark,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<
-            UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>>(
-          'light',
-          light,
-        ),
-      )
+      ..add(DiagnosticsProperty<AppTheme>('dark', dark))
+      ..add(DiagnosticsProperty<AppTheme>('light', light))
       ..add(EnumProperty<ThemeMode>('mode', mode))
       ..add(
         EnumProperty<EnhancedThemeMode>(
@@ -2788,8 +2773,8 @@ class ThemeProvider extends InheritedWidget {
   final GlobalThemeKey themingKey;
 
   final ThemeMode mode;
-  final UtilitiesExampleEnhancedTheme light;
-  final UtilitiesExampleEnhancedTheme dark;
+  final AppTheme light;
+  final AppTheme dark;
 
   static ThemeProvider? maybeOf(final BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<ThemeProvider>();
@@ -2806,10 +2791,7 @@ class ThemeProvider extends InheritedWidget {
   set enhancedThemeMode(final EnhancedThemeMode mode) =>
       themingKey.currentState?.enhancedThemeMode = mode;
 
-  void changeTheme({
-    final UtilitiesExampleEnhancedTheme? theme,
-    final EnhancedThemeMode? mode,
-  }) =>
+  void changeTheme({final AppTheme? theme, final EnhancedThemeMode? mode}) =>
       themingKey.currentState?.changeTheme(theme: theme, mode: mode);
 
   void switchTheme() => themingKey.currentState?.switchTheme();
@@ -2824,25 +2806,12 @@ class ThemeProvider extends InheritedWidget {
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        EnumProperty<UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>>(
-          'light',
-          light,
-        ),
-      )
+      ..add(DiagnosticsProperty<AppTheme>('dark', dark))
+      ..add(DiagnosticsProperty<AppTheme>('light', light))
       ..add(EnumProperty<ThemeMode>('mode', mode))
-      ..add(
-        EnumProperty<UtilitiesExampleTheme<AllTagsAndGroupsEnhancedTheme>>(
-          'dark',
-          dark,
-        ),
-      )
       ..add(DiagnosticsProperty<GlobalThemeKey>('themingKey', themingKey))
       ..add(
-        EnumProperty<EnhancedThemeMode>(
-          'enhancedThemeMode',
-          enhancedThemeMode,
-        ),
+        EnumProperty<EnhancedThemeMode>('enhancedThemeMode', enhancedThemeMode),
       );
   }
 }
