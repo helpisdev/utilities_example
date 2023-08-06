@@ -4,6 +4,8 @@ import 'dart:collection';
 import 'package:adaptive_scaffold/adaptive_scaffold.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:utilities/utilities.dart' as util;
 
 import 'configuration.dart';
@@ -45,12 +47,12 @@ class _AppState extends State<App> {
   bool? _storedTheme() => storage.read<bool>(StorageKey.isDarkMode.name);
 
   AppLocalizations? _l10n;
+  bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    _configTheme();
-    _configLocale();
+    unawaited(_init());
   }
 
   @override
@@ -61,25 +63,67 @@ class _AppState extends State<App> {
   }
 
   @override
-  Widget build(final BuildContext context) => TrackPlayerProvider(
-        player: player = Player.from(
-          player: player,
-          playlist: _generateTracks(),
-        ),
-        child: const _AppRouter(),
-      );
+  Widget build(final BuildContext context) => _loading
+      ? const MaterialLoader()
+      : TrackPlayerProvider(
+          player: player = Player.from(
+            player: player,
+            playlist: _generateTracks(),
+          ),
+          child: const _AppRouter(),
+        );
+
+  // We can display a loader while this is initializing for better UX. Doesn't
+  // block too much, but saves a bit
+  //
+  // The real lag problem comes from the initialization of GTK.
+  Future<void> _init() async {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    await storage.init();
+
+    util.ensureInitialized();
+    if (util.Platform.isWeb) {
+      util.usePathUrlStrategy();
+    }
+
+    final util.PermissionHandler permissions = util.PermissionHandler(
+      permissions: <Permission>{
+        Permission.audio,
+        Permission.bluetooth,
+        Permission.bluetoothAdvertise,
+        Permission.bluetoothConnect,
+        Permission.bluetoothScan,
+        Permission.mediaLibrary,
+        Permission.notification,
+        Permission.storage,
+      },
+    );
+
+    unawaited(permissions.request());
+
+    if (!util.Platform.isWeb) {
+      await PlayerConfig.configureAudio();
+      if (util.Platform.isLinux) {
+        PlayerConfig.configureMPV();
+      }
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((final Duration timestamp) {
+      _configTheme();
+      _configLocale();
+      setState(() => _loading = false);
+    });
+  }
 
   void _configTheme() {
-    WidgetsBinding.instance.addPostFrameCallback((final Duration timestamp) {
-      final ThemeProvider theme = ThemeProvider.of(context);
-      // Theme is not accessible by default yet (we use the MaterialApp in the
-      // build of this widget) but it will fallback to a default value and not
-      // raise any exception.
-      final bool isDarkMode = _storedTheme() ?? context.isDarkMode;
-      if (isDarkMode && theme.enhancedThemeMode != EnhancedThemeMode.dark) {
-        theme.switchTheme();
-      }
-    });
+    final ThemeProvider theme = ThemeProvider.of(context);
+    // Theme is not accessible by default yet (we use the MaterialApp in the
+    // build of this widget) but it will fallback to a default value and not
+    // raise any exception.
+    final bool isDarkMode = _storedTheme() ?? context.isDarkMode;
+    if (isDarkMode && theme.enhancedThemeMode != EnhancedThemeMode.dark) {
+      theme.switchTheme();
+    }
   }
 
   void _configLocale() {
@@ -88,12 +132,8 @@ class _AppState extends State<App> {
     );
     unawaited(
       lookupAppLocalizations(locale).then((final AppLocalizations l10n) {
-        WidgetsBinding.instance.addPostFrameCallback(
-          (final Duration timeStamp) {
-            context.changeLocale(locale);
-            setState(() => _l10n = l10n);
-          },
-        );
+        context.changeLocale(locale);
+        setState(() => _l10n = l10n);
       }),
     );
   }
@@ -157,4 +197,27 @@ class _AppRouter extends StatelessWidget {
       localizationsDelegates: _delegates,
     );
   }
+}
+
+class MaterialLoader extends StatelessWidget {
+  const MaterialLoader({super.key});
+
+  @override
+  Widget build(final BuildContext context) => MaterialApp(
+        home: Scaffold(
+          body: Column(
+            children: <Widget>[
+              Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor:
+                        AppTheme.rustDarkTheme.themeData.background,
+                    color: AppTheme.rustDarkTheme.themeData.onBackground,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
 }

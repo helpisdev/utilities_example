@@ -18,8 +18,13 @@ class StorageService {
   Future<void> init() async {
     _box = await SharedPreferences.getInstance();
 
-    await _box!.write(StorageKey.isDarkMode.name, null);
-    await _box!.write(StorageKey.locale.name, null);
+    if (!_box!.containsKey(StorageKey.isDarkMode.name)) {
+      await _box!.write(StorageKey.isDarkMode.name, null);
+    }
+
+    if (!_box!.containsKey(StorageKey.locale.name)) {
+      await _box!.write(StorageKey.locale.name, null);
+    }
   }
 
   SharedPreferences? _box;
